@@ -1,7 +1,6 @@
 # train.py
 
 import pandas as pd
-import numpy as np
 import os
 import pickle
 from sklearn.linear_model import LinearRegression
@@ -27,10 +26,16 @@ def clean_data(df):
 
 
 def select_features(df):
-    # Assume last column is target (price)
-    X = df.iloc[:, :-1]
-    y = df.iloc[:, -1]
+    # 🔴 IMPORTANT: Explicitly define feature columns
+    feature_columns = ['sqft', 'bedrooms', 'garden']   # change if needed
+    target_column = 'price'
+
+    X = df[feature_columns]
+    y = df[target_column]
+
     print("Feature selection completed!")
+    print("Using features:", feature_columns)
+
     return X, y
 
 
@@ -55,6 +60,7 @@ def train_and_evaluate():
     model.fit(X_train, y_train)
 
     print("Model trained successfully!")
+    print("Model expects", model.n_features_in_, "features")
 
     # Save model
     os.makedirs("models", exist_ok=True)

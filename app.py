@@ -2,17 +2,24 @@ import streamlit as st
 import pickle
 import numpy as np
 
-with open("models/model.pkl", "rb") as f:
-    model = pickle.load(f)
+# Load trained model
+with open("models/model.pkl", "rb") as file:
+    model = pickle.load(file)
 
-st.title("House Price Prediction App")
+# Title
+st.title("Simple House Price Prediction")
+st.write("Enter house details below:")
 
-st.write("Enter house details:")
+# Inputs
+area = st.number_input("Area (Square Feet)", min_value=0.0)
+bedrooms = st.number_input("Number of Bedrooms", min_value=0)
 
-area = st.number_input("Area")
-bedrooms = st.number_input("Bedrooms")
-
-if st.button("Predict"):
-    features = np.array([[area, bedrooms]])
+# Predict Button
+if st.button("Predict Price"):
+    
+    # Model expects 2 features
+    features = np.array([[area,bedrooms,0]])  # Default garden=0 and price=0 for prediction
+    
     prediction = model.predict(features)
-    st.success(f"Predicted Price: {prediction[0]}")
+    
+    st.success(f" Predicted Price: ₹ {prediction[0]:,.2f}")
