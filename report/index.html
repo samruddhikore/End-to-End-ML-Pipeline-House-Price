@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction ML - Project Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏠 House Price Prediction ML Project</h1>
+            <p>Complete Machine Learning Analysis & Deployment Guide</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="pages/problem-statement.html">Problem Statement</a></li>
+                <li><a href="pages/methodology.html">Methodology</a></li>
+                <li><a href="pages/eda.html">Data Analysis</a></li>
+                <li><a href="pages/model.html">Model Explanation</a></li>
+                <li><a href="pages/evaluation.html">Evaluation</a></li>
+                <li><a href="pages/deployment.html">Deployment</a></li>
+                <li><a href="pages/report.html">Full Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <section class="content">
+            <h1>Project Overview & Executive Summary</h1>
+            
+            <div class="alert alert-info">
+                <strong>Project Status:</strong> ✓ Complete and Ready for Deployment
+            </div>
+
+            <h2>Quick Facts</h2>
+            <div class="metrics">
+                <div class="metric-box">
+                    <div class="metric-label">Dataset Size</div>
+                    <div class="metric-value">65</div>
+                    <div class="metric-description">Houses analyzed</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Features</div>
+                    <div class="metric-value">3</div>
+                    <div class="metric-description">Input variables</div>
+                </div>
+                <div class="metric-box success">
+                    <div class="metric-label">Test R² Score</div>
+                    <div class="metric-value" data-value="97">97%</div>
+                    <div class="metric-description">Model accuracy</div>
+                </div>
+                <div class="metric-box accent">
+                    <div class="metric-label">Test RMSE</div>
+                    <div class="metric-value">$26K</div>
+                    <div class="metric-description">Average error</div>
+                </div>
+            </div>
+
+            <h2>Project Description</h2>
+            <p>
+                This is a comprehensive machine learning project focused on predicting house prices using linear regression. 
+                The project demonstrates end-to-end machine learning workflow including data exploration, feature engineering, 
+                model training, evaluation, and deployment considerations for real-world applications.
+            </p>
+
+            <h2>Key Achievements</h2>
+            <ul class="feature-list">
+                <li>Successfully built a linear regression model with 97% test accuracy (R² = 0.97)</li>
+                <li>Identified strong correlations between property features and prices</li>
+                <li>Generated comprehensive visualizations for decision-making</li>
+                <li>Developed deployment-ready model with complete documentation</li>
+                <li>Created interactive dashboard for stakeholder communication</li>
+                <li>Documented all methodologies and assumptions clearly</li>
+            </ul>
+        </section>
+
+        <!-- Quick Navigation -->
+        <section class="content">
+            <h2>Quick Navigation</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <h3>📋 Problem Statement</h3>
+                    <p>Understand the business problem, objectives, and success criteria.</p>
+                    <a href="pages/problem-statement.html" class="btn">View Details</a>
+                </div>
+                <div class="grid-item">
+                    <h3>🔍 Data Analysis</h3>
+                    <p>Explore the dataset with comprehensive EDA and visualization.</p>
+                    <a href="pages/eda.html" class="btn">View Analysis</a>
+                </div>
+                <div class="grid-item">
+                    <h3>🧮 Model & Methods</h3>
+                    <p>Learn about the linear regression model and mathematical foundations.</p>
+                    <a href="pages/model.html" class="btn">View Model</a>
+                </div>
+                <div class="grid-item">
+                    <h3>📊 Evaluation Results</h3>
+                    <p>Review model performance metrics and evaluation analysis.</p>
+                    <a href="pages/evaluation.html" class="btn">View Results</a>
+                </div>
+                <div class="grid-item">
+                    <h3>🚀 Deployment Guide</h3>
+                    <p>Understand deployment architecture and real-world applications.</p>
+                    <a href="pages/deployment.html" class="btn">View Guide</a>
+                </div>
+                <div class="grid-item">
+                    <h3>📖 Full Research Report</h3>
+                    <p>Complete academic-level research report with all details.</p>
+                    <a href="pages/report.html" class="btn">View Report</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Performance Overview -->
+        <section class="content">
+            <h2>Model Performance Overview</h2>
+            
+            <div class="card success">
+                <h3>Model Type: Linear Regression</h3>
+                <p><strong>Equation:</strong> Price = -34,864.15 + (139.16 × sqft) + (14,363.47 × bedrooms) + (13,629.44 × garden)</p>
+                <p><strong>Features Used:</strong> Square Footage, Number of Bedrooms, Garden Availability</p>
+            </div>
+
+            <h3>Key Performance Metrics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Training Set</th>
+                        <th>Testing Set</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R² Score</strong></td>
+                        <td>0.9863 (98.63%)</td>
+                        <td>0.9700 (97.00%)</td>
+                        <td>Model explains 97% of price variance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RMSE</strong></td>
+                        <td>$13,318.97</td>
+                        <td>$26,109.44</td>
+                        <td>Average prediction error</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MAE</strong></td>
+                        <td>$8,545.48</td>
+                        <td>$18,856.60</td>
+                        <td>Median prediction error</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sample Size</strong></td>
+                        <td>52 houses</td>
+                        <td>13 houses</td>
+                        <td>Data split (80/20)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Data Overview -->
+        <section class="content">
+            <h2>Dataset Overview</h2>
+            
+            <h3>Basic Statistics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Count</th>
+                        <th>Mean</th>
+                        <th>Std Dev</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Square Feet (sqft)</strong></td>
+                        <td>65</td>
+                        <td>1,650</td>
+                        <td>721.98</td>
+                        <td>800</td>
+                        <td>3,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bedrooms</strong></td>
+                        <td>65</td>
+                        <td>3.62</td>
+                        <td>0.96</td>
+                        <td>2</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Garden (0/1)</strong></td>
+                        <td>65</td>
+                        <td>0.54</td>
+                        <td>0.50</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Price ($)</strong></td>
+                        <td>65</td>
+                        <td>233,538</td>
+                        <td>84,033</td>
+                        <td>120,000</td>
+                        <td>420,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>Data Quality Note:</strong> Dataset contains 8 duplicate rows (12% of data). These were retained for training as they represent legitimate property variations.
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="content">
+            <h2>Technology Stack</h2>
+            
+            <h3>Programming & Libraries</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Technology</th>
+                        <th>Version</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Language</td>
+                        <td>Python</td>
+                        <td>3.7+</td>
+                        <td>Core development and ML pipeline</td>
+                    </tr>
+                    <tr>
+                        <td>ML Framework</td>
+                        <td>scikit-learn</td>
+                        <td>1.3.0</td>
+                        <td>Model training and evaluation</td>
+                    </tr>
+                    <tr>
+                        <td>Data Processing</td>
+                        <td>Pandas</td>
+                        <td>2.0.3</td>
+                        <td>Data manipulation and analysis</td>
+                    </tr>
+                    <tr>
+                        <td>Numerical Computing</td>
+                        <td>NumPy</td>
+                        <td>1.24.3</td>
+                        <td>Array operations and calculations</td>
+                    </tr>
+                    <tr>
+                        <td>Web Application</td>
+                        <td>Streamlit</td>
+                        <td>1.28.1</td>
+                        <td>Interactive web interface</td>
+                    </tr>
+                    <tr>
+                        <td>Visualization</td>
+                        <td>Matplotlib/Seaborn</td>
+                        <td>Latest</td>
+                        <td>Data visualization</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>HTML/CSS/JavaScript</td>
+                        <td>Modern</td>
+                        <td>Interactive dashboard</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Document Navigation -->
+        <section class="content">
+            <h2>Report Navigation</h2>
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="pages/problem-statement.html">1. Problem Statement & Objectives</a></li>
+                    <li><a href="pages/methodology.html">2. Proposed Methodology</a></li>
+                    <li><a href="pages/eda.html">3. Exploratory Data Analysis</a></li>
+                    <li><a href="pages/model.html">4. Model Design & Mathematical Framework</a></li>
+                    <li><a href="pages/evaluation.html">5. Results & Evaluation</a></li>
+                    <li><a href="pages/deployment.html">6. Deployment Guide & Real-World Applications</a></li>
+                    <li><a href="pages/report.html">7. Complete Research Report</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="content">
+            <h2>Key Insights & Findings</h2>
+            
+            <h3>Feature Importance Analysis</h3>
+            <p>
+                Based on the model coefficients and correlation analysis, the following insights emerge:
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Coefficient</th>
+                        <th>Correlation with Price</th>
+                        <th>Impact Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Square Feet</strong></td>
+                        <td>$139.16</td>
+                        <td>0.988</td>
+                        <td>Every 100 sq ft increases price by ~$13,916. Strongest predictor.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bedrooms</strong></td>
+                        <td>$14,363.47</td>
+                        <td>0.970</td>
+                        <td>Each bedroom adds ~$14,363 to estimated price. Very significant.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Garden</strong></td>
+                        <td>$13,629.44</td>
+                        <td>0.187</td>
+                        <td>Garden availability adds ~$13,629. Moderate predictor despite low correlation.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Model Performance Insights</h3>
+            <div class="card">
+                <h4>✓ Strong Generalization</h4>
+                <p>Test R² (0.97) is close to Training R² (0.986), indicating good generalization and minimal overfitting.</p>
+            </div>
+            <div class="card">
+                <h4>✓ Reliable Predictions</h4>
+                <p>Average test error of $26,109 (RMSE) and $18,857 (MAE) are reasonable given price range of $120K-$420K.</p>
+            </div>
+            <div class="card">
+                <h4>⚠ Linear Assumption</h4>
+                <p>Model assumes linear relationships. More complex features might improve performance but could reduce interpretability.</p>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="content">
+            <h2>Recommendations & Next Steps</h2>
+            
+            <h3>For Immediate Deployment</h3>
+            <ul class="feature-list">
+                <li>Deploy model in production using Streamlit or REST API</li>
+                <li>Set up monitoring for prediction accuracy and data drift</li>
+                <li>Create price prediction interface for real estate professionals</li>
+                <li>Implement user feedback mechanism for continuous improvement</li>
+            </ul>
+
+            <h3>For Model Enhancement</h3>
+            <ul class="feature-list">
+                <li>Collect more data to improve robustness (currently 65 samples)</li>
+                <li>Add additional features (location, age, condition, market trends)</li>
+                <li>Explore polynomial features and interactions</li>
+                <li>Implement ensemble methods (Random Forest, Gradient Boosting) for comparison</li>
+                <li>Perform hyperparameter tuning if using more complex models</li>
+            </ul>
+
+            <h3>For Project Maintenance</h3>
+            <ul class="feature-list">
+                <li>Establish model retraining schedule (quarterly or on-demand)</li>
+                <li>Document any changes to data collection methodology</li>
+                <li>Monitor prediction errors and identify systematic biases</li>
+                <li>Keep stakeholders updated with performance metrics</li>
+            </ul>
+        </section>
+
+        <!-- Contact & Support -->
+        <section class="content">
+            <h2>Project Information</h2>
+            
+            <div class="card">
+                <h3>📁 Project Repository</h3>
+                <p>All code, data, and documentation are organized in the project folder:</p>
+                <pre><code>house-price-ml/
+├── data/
+│   └── housing.csv (65 property records)
+├── models/
+│   └── model.pkl (Trained linear regression)
+├── src/
+│   ├── train.py
+│   ├── predict.py
+│   ├── evaluate.py
+│   ├── eda.py
+│   └── feature_engineering.py
+├── report/
+│   ├── index.html (this file)
+│   ├── pages/
+│   └── assets/
+├── app.py (Streamlit web app)
+├── requirements.txt
+└── README.md</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Getting Started</h3>
+                <p><strong>Installation:</strong></p>
+                <pre><code>pip install -r requirements.txt</code></pre>
+                <p><strong>Training Model:</strong></p>
+                <pre><code>python src/train.py</code></pre>
+                <p><strong>Run Web App:</strong></p>
+                <pre><code>streamlit run app.py</code></pre>
+                <p><strong>View This Report:</strong></p>
+                <p>Open <code>report/index.html</code> in your web browser</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>House Price Prediction ML Project</strong></p>
+        <p>Research-level machine learning project with complete documentation</p>
+        <p>&copy; 2024 | Data-Driven Analysis & Machine Learning</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

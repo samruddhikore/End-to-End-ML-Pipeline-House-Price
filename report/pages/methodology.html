@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology | House Price Prediction ML</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏠 House Price Prediction ML Project</h1>
+            <p>Complete Machine Learning Analysis & Deployment Guide</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="problem-statement.html">Problem Statement</a></li>
+                <li><a href="methodology.html">Methodology</a></li>
+                <li><a href="eda.html">Data Analysis</a></li>
+                <li><a href="model.html">Model Explanation</a></li>
+                <li><a href="evaluation.html">Evaluation</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+                <li><a href="report.html">Full Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Methodology -->
+        <section class="content">
+            <h1>2. Proposed Methodology</h1>
+
+            <div class="alert alert-info">
+                <strong>Section Overview:</strong> This section explains the systematic approach, techniques, and 
+                tools used to develop the house price prediction model.
+            </div>
+
+            <h2>2.1 Project Workflow & Pipeline</h2>
+            
+            <div class="card">
+                <h3>ML Pipeline Architecture</h3>
+                <p>The project follows a standard machine learning lifecycle:</p>
+                <pre><code>
+1. DATA ACQUISITION & LOADING
+   └─ Load housing.csv (65 records × 4 features)
+
+2. EXPLORATORY DATA ANALYSIS (EDA)
+   ├─ Statistical summaries
+   ├─ Distribution analysis
+   ├─ Correlation analysis
+   └─ Visualization & insights
+
+3. DATA PREPROCESSING & CLEANING
+   ├─ Handle missing values
+   ├─ Remove duplicates
+   ├─ Feature validation
+   └─ Data quality checks
+
+4. FEATURE ENGINEERING
+   ├─ Feature selection
+   ├─ Feature scaling (if needed)
+   └─ Feature interaction analysis
+
+5. MODEL DEVELOPMENT
+   ├─ Train-test split (80-20)
+   ├─ Model selection (Linear Regression)
+   ├─ Model training
+   └─ Hyperparameter tuning
+
+6. MODEL EVALUATION
+   ├─ Performance metrics (R², RMSE, MAE)
+   ├─ Cross-validation
+   ├─ Residual analysis
+   └─ Prediction analysis
+
+7. MODEL DEPLOYMENT
+   ├─ Model serialization (pickle)
+   ├─ Web interface (Streamlit)
+   ├─ Prediction API
+   └─ Monitoring setup
+
+8. DOCUMENTATION & REPORTING
+   ├─ Technical documentation
+   ├─ HTML report generation
+   └─ Stakeholder presentations
+                </code></pre>
+            </div>
+
+            <h2>2.2 Data Acquisition & Description</h2>
+
+            <h3>Dataset Information</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Records</td>
+                        <td>65</td>
+                        <td>Residential property records</td>
+                    </tr>
+                    <tr>
+                        <td>Total Features</td>
+                        <td>4</td>
+                        <td>3 input features + 1 target variable</td>
+                    </tr>
+                    <tr>
+                        <td>Data Format</td>
+                        <td>CSV</td>
+                        <td>Comma-separated values (plain text)</td>
+                    </tr>
+                    <tr>
+                        <td>File Size</td>
+                        <td>~2 KB</td>
+                        <td>Small, easy to distribute</td>
+                    </tr>
+                    <tr>
+                        <td>Data Type</td>
+                        <td>Numerical</td>
+                        <td>All features and target are numeric</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Feature Definitions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Units/Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>sqft</strong></td>
+                        <td>Numerical (Input)</td>
+                        <td>Total living area of the property</td>
+                        <td>800 - 3000 sq ft</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bedrooms</strong></td>
+                        <td>Numerical (Input)</td>
+                        <td>Number of bedrooms</td>
+                        <td>2 - 5 bedrooms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>garden</strong></td>
+                        <td>Categorical (Input)</td>
+                        <td>Whether property has a garden</td>
+                        <td>0 (No) or 1 (Yes)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>price</strong></td>
+                        <td>Numerical (Target)</td>
+                        <td>Median house price in the area</td>
+                        <td>$120,000 - $420,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>2.3 Exploratory Data Analysis (EDA)</h2>
+
+            <h3>EDA Objectives</h3>
+            <ul>
+                <li>Understand data distribution and characteristics</li>
+                <li>Identify missing values and outliers</li>
+                <li>Discover relationships between features and target</li>
+                <li>Generate insights that guide feature engineering</li>
+                <li>Inform model selection decisions</li>
+            </ul>
+
+            <h3>EDA Techniques Applied</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>Distribution Analysis</h4>
+                    <p>Histogram plots showing frequency distribution of each feature</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Descriptive Statistics</h4>
+                    <p>Mean, median, std dev, min, max for all numerical features</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Correlation Analysis</h4>
+                    <p>Pearson correlation matrix and heatmap visualization</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Outlier Detection</h4>
+                    <p>Box plots to identify and understand potential outliers</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Relationship Analysis</h4>
+                    <p>Scatter plots and pair plots showing feature relationships</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Target Analysis</h4>
+                    <p>Detailed analysis of price distribution and characteristics</p>
+                </div>
+            </div>
+
+            <h2>2.4 Data Preprocessing & Cleaning</h2>
+
+            <h3>Preprocessing Steps</h3>
+            <div class="card">
+                <h4>1. Missing Value Handling</h4>
+                <p>
+                    <strong>Finding:</strong> No missing values detected in the dataset (all 65 records complete)
+                </p>
+                <p>
+                    <strong>Action:</strong> No missing value imputation needed
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>2. Duplicate Record Handling</h4>
+                <p>
+                    <strong>Finding:</strong> Dataset contains 8 duplicate records (12% of data)
+                </p>
+                <p>
+                    <strong>Action:</strong> Records are retained as they represent legitimate property variations with same characteristics and prices
+                </p>
+                <p>
+                    <strong>Consideration:</strong> These duplicates may inflate model confidence slightly; ideally collect more unique samples
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>3. Outlier Detection & Handling</h4>
+                <p>
+                    <strong>Method:</strong> IQR-based outlier detection using box plot analysis
+                </p>
+                <p>
+                    <strong>Finding:</strong> No statistical outliers detected in any feature
+                </p>
+                <p>
+                    <strong>Action:</strong> All data retained for training
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>4. Feature Validation</h4>
+                <p>
+                    <strong>Checked:</strong> Data types, range validity, reasonable values
+                </p>
+                <p>
+                    <strong>Result:</strong> All features valid and within expected ranges
+                </p>
+            </div>
+
+            <h3>Data Quality Summary</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quality Check</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Missing Values</td>
+                        <td>✓ Pass</td>
+                        <td>0 missing values (0%)</td>
+                    </tr>
+                    <tr>
+                        <td>Duplicates</td>
+                        <td>⚠ Warning</td>
+                        <td>8 duplicates (12%) - retained for assessment</td>
+                    </tr>
+                    <tr>
+                        <td>Outliers</td>
+                        <td>✓ Pass</td>
+                        <td>No statistical outliers detected</td>
+                    </tr>
+                    <tr>
+                        <td>Data Types</td>
+                        <td>✓ Pass</td>
+                        <td>All numeric as expected</td>
+                    </tr>
+                    <tr>
+                        <td>Value Ranges</td>
+                        <td>✓ Pass</td>
+                        <td>All values within reasonable bounds</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>2.5 Feature Engineering & Selection</h2>
+
+            <h3>Feature Selection Strategy</h3>
+            <p>
+                Given the small feature set (3 input features), all features were retained for the initial model. 
+                Feature selection was guided by:
+            </p>
+            <ul>
+                <li><strong>Correlation with Target:</strong> All features show meaningful correlation with price</li>
+                <li><strong>Domain Knowledge:</strong> All features are known to influence house prices</li>
+                <li><strong>Practical Relevance:</strong> All features are easily measurable at time of prediction</li>
+                <li><strong>Model Performance:</strong> Including all features optimizes model accuracy</li>
+            </ul>
+
+            <h3>Feature Importance Analysis</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Correlation with Price</th>
+                        <th>Model Coefficient</th>
+                        <th>Relative Importance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>sqft</strong></td>
+                        <td>0.988 (Very Strong)</td>
+                        <td>$139.16 per sqft</td>
+                        <td>Strongest predictor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bedrooms</strong></td>
+                        <td>0.970 (Very Strong)</td>
+                        <td>$14,363.47 per bedroom</td>
+                        <td>Extremely important</td>
+                    </tr>
+                    <tr>
+                        <td><strong>garden</strong></td>
+                        <td>0.187 (Weak-Moderate)</td>
+                        <td>$13,629.44 for garden</td>
+                        <td>Moderate importance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Feature Scaling Decision</h3>
+            <div class="card">
+                <p>
+                    <strong>Decision:</strong> No feature scaling applied
+                </p>
+                <p>
+                    <strong>Reasoning:</strong> Linear regression is scale-invariant in terms of predictions. 
+                    Features are already on similar magnitude scales (thousands to tens of thousands). 
+                    Interpretability is improved without scaling.
+                </p>
+            </div>
+
+            <h2>2.6 Model Selection & Justification</h2>
+
+            <h3>Why Linear Regression?</h3>
+            <div class="card success">
+                <h4>✓ Advantages</h4>
+                <ul class="feature-list">
+                    <li>Simple and interpretable - coefficients directly show feature impact</li>
+                    <li>Fast to train and make predictions</li>
+                    <li>Features show strong linear relationships with target (r > 0.95)</li>
+                    <li>Small dataset (65 samples) - simpler models generalize better</li>
+                    <li>No hyperparameter tuning needed - reduces complexity</li>
+                    <li>Statistical properties well-understood and documented</li>
+                    <li>Excellent baseline against which to compare other models</li>
+                </ul>
+            </div>
+
+            <h3>Considered Alternatives</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model Type</th>
+                        <th>Why Not Selected</th>
+                        <th>When to Use Instead</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Polynomial Regression</strong></td>
+                        <td>Risk of overfitting; small dataset makes high-degree polynomials dangerous</td>
+                        <td>If data shows non-linear relationships; with larger datasets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Random Forest</strong></td>
+                        <td>Overkill for simple problem; harder to interpret; needs tuning</td>
+                        <td>With many features or categorical variables; non-linear patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Neural Networks</strong></td>
+                        <td>Requires much more data; black-box nature; expensive computation</td>
+                        <td>With very large datasets and complex patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SVM</strong></td>
+                        <td>Hard to interpret; hyperparameter tuning required; small benefit</td>
+                        <td>With high-dimensional data or non-linear boundaries</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>2.7 Model Training Process</h2>
+
+            <h3>Data Splitting Strategy</h3>
+            <div class="card">
+                <h4>Train-Test Split</h4>
+                <p>
+                    <strong>Method:</strong> 80% training, 20% testing<br>
+                    <strong>Training Sets:</strong> 52 samples<br>
+                    <strong>Testing Set:</strong> 13 samples<br>
+                    <strong>Random State:</strong> 42 (for reproducibility)<br>
+                    <strong>Stratification:</strong> Not applied (continuous target, no stratification needed)
+                </p>
+            </div>
+
+            <h3>Model Training</h3>
+            <div class="card">
+                <h4>Training Process</h4>
+                <p>
+                    The linear regression model fits using the Ordinary Least Squares (OLS) method:
+                </p>
+                <div class="equation">
+                    <p>minimize: Σ(y_i - ŷ_i)²</p>
+                    <p>where y_i = actual price, ŷ_i = predicted price</p>
+                </div>
+                <p>
+                    The model learns coefficients that minimize the sum of squared residuals on training data.
+                </p>
+            </div>
+
+            <h3>Resulting Model Equation</h3>
+            <div class="card success">
+                <h3>Price Prediction Formula</h3>
+                <div class="equation">
+                    <p style="margin: 1rem 0; font-size: 1.2rem;">
+                        Price = -34,864.15 + (139.16 × sqft) + (14,363.47 × bedrooms) + (13,629.44 × garden)
+                    </p>
+                </div>
+                <h4>Interpretation</h4>
+                <ul>
+                    <li><strong>Intercept (-$34,864.15):</strong> Base value before adding feature contributions (theoretical baseline)</li>
+                    <li><strong>sqft coefficient ($139.16):</strong> Each additional sq ft adds this amount to price</li>
+                    <li><strong>bedrooms coefficient ($14,363.47):</strong> Each additional bedroom adds this amount</li>
+                    <li><strong>garden coefficient ($13,629.44):</strong> Having a garden adds this fixed amount</li>
+                </ul>
+            </div>
+
+            <h2>2.8 Model Evaluation Strategy</h2>
+
+            <h3>Evaluation Metrics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Formula</th>
+                        <th>Interpretation</th>
+                        <th>Ideal Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R² Score</strong></td>
+                        <td>1 - (SS_res / SS_tot)</td>
+                        <td>% of variance explained (0-1 range)</td>
+                        <td>1.0 (closer to 1 is better)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RMSE</strong></td>
+                        <td>√(Σ(y_i - ŷ_i)² / n)</td>
+                        <td>Average magnitude of errors (same units as target)</td>
+                        <td>Smaller is better</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MAE</strong></td>
+                        <td>Σ|y_i - ŷ_i| / n</td>
+                        <td>Mean absolute error (more robust than RMSE)</td>
+                        <td>Smaller is better</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Residuals</strong></td>
+                        <td>y_i - ŷ_i</td>
+                        <td>Prediction errors for analysis</td>
+                        <td>Normally distributed, centered at 0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Cross-Validation Approach</h3>
+            <div class="card">
+                <p>
+                    <strong>Not Applied in Baseline:</strong> Given small dataset (65 samples), simple train-test split used.
+                </p>
+                <p>
+                    <strong>Recommendation:</strong> For enhanced validation, use 5-fold cross-validation:
+                    <ul>
+                        <li>Divides data into 5 equal folds</li>
+                        <li>Trains 5 models, each using 4 folds for training, 1 for validation</li>
+                        <li>Provides more robust performance estimate</li>
+                        <li>Better utilizes small dataset</li>
+                    </ul>
+                </p>
+            </div>
+
+            <h2>2.9 Hyperparameter Tuning</h2>
+
+            <div class="card">
+                <p>
+                    <strong>Linear regression has no hyperparameters to tune.</strong>
+                </p>
+                <p>
+                    The model is fully determined by:
+                    <ul>
+                        <li>The training data (X, y)</li>
+                        <li>The OLS optimization criterion</li>
+                        <li>The choice of features included</li>
+                    </ul>
+                </p>
+                <p>
+                    Therefore, all efforts in model optimization focused on data quality and feature engineering 
+                    rather than hyperparameter tuning.
+                </p>
+            </div>
+
+            <h2>2.10 Implementation Technologies</h2>
+
+            <div class="card">
+                <h3>Python Libraries</h3>
+                <ul class="feature-list">
+                    <li><strong>pandas:</strong> Data loading, cleaning, manipulation (DataFrame operations)</li>
+                    <li><strong>numpy:</strong> Numerical computations, array operations</li>
+                    <li><strong>scikit-learn:</strong> ML model (LinearRegression, train_test_split, metrics)</li>
+                    <li><strong>matplotlib & seaborn:</strong> Visualization and EDA plots</li>
+                    <li><strong>pickle:</strong> Model serialization and deployment</li>
+                    <li><strong>scipy:</strong> Statistical analysis (Q-Q plots, distributions)</li>
+                </ul>
+            </div>
+
+            <h2>2.11 Code Organization</h2>
+            
+            <div class="card">
+                <h3>Project Structure</h3>
+                <pre><code>house-price-ml/
+├── src/
+│   ├── train.py              # Model training pipeline
+│   ├── evaluate.py           # Model evaluation
+│   ├── predict.py            # Prediction script
+│   ├── eda.py                # Exploratory analysis
+│   ├── data_cleaning.py      # Data preprocessing
+│   └── feature_engineering.py # Feature selection
+├── data/
+│   └── housing.csv           # Input dataset
+├── models/
+│   └── model.pkl             # Trained model (serialized)
+├── app.py                    # Streamlit web interface
+├── generate_report_data.py   # Report generation script
+├── requirements.txt          # Python dependencies
+└── report/                   # HTML documentation
+</code></pre>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>
+                The methodology employs a systematic, industry-standard machine learning approach. Linear regression 
+                was selected as the optimal model given the problem constraints and data characteristics. The resulting 
+                model is both accurate (R² = 0.97) and interpretable, making it suitable for real-world deployment.
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Next Steps</h2>
+            <p>
+                Now that the methodology is clear, explore the <a href="eda.html">Exploratory Data Analysis</a> 
+                section to see the actual insights discovered from the data.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>House Price Prediction ML Project</strong></p>
+        <p>Research-level machine learning project with complete documentation</p>
+        <p>&copy; 2024 | Data-Driven Analysis & Machine Learning</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

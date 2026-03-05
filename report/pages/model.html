@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Explanation | House Price Prediction ML</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏠 House Price Prediction ML Project</h1>
+            <p>Complete Machine Learning Analysis & Deployment Guide</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="problem-statement.html">Problem Statement</a></li>
+                <li><a href="methodology.html">Methodology</a></li>
+                <li><a href="eda.html">Data Analysis</a></li>
+                <li><a href="model.html">Model Explanation</a></li>
+                <li><a href="evaluation.html">Evaluation</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+                <li><a href="report.html">Full Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Model Explanation -->
+        <section class="content">
+            <h1>4. Model Design & Mathematical Framework</h1>
+
+            <div class="alert alert-info">
+                <strong>Section Overview:</strong> This section explains the linear regression model, its mathematical foundations, 
+                interpretation, and real-world application.
+            </div>
+
+            <h2>4.1 Model Overview</h2>
+
+            <h3>Model Type:Linear Regression</h3>
+            <div class="card success">
+                <h4>What is Linear Regression?</h4>
+                <p>
+                    Linear regression is a statistical method for modeling the relationship between one dependent variable 
+                    (target: house price) and multiple independent variables (features: sqft, bedrooms, garden). 
+                    It assumes a linear relationship between the features and target.
+                </p>
+            </div>
+
+            <h3>Why Linear Regression for This Problem?</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Criterion</th>
+                        <th>Assessment</th>
+                        <th>Implication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Feature-Target Relationships</td>
+                        <td>Strongly linear (r > 0.97)</td>
+                        <td>✓ Linear model well-suited</td>
+                    </tr>
+                    <tr>
+                        <td>Dataset Size</td>
+                        <td>Small (65 samples)</td>
+                        <td>✓ Simpler model reduces overfitting</td>
+                    </tr>
+                    <tr>
+                        <td>Interpretability Requirement</td>
+                        <td>High importance</td>
+                        <td>✓ Linear model is easily interpretable</td>
+                    </tr>
+                    <tr>
+                        <td>Prediction Speed</td>
+                        <td>Critical for real-time</td>
+                        <td>✓ Linear model is ultra-fast</td>
+                    </tr>
+                    <tr>
+                        <td>Model Complexity Needed</td>
+                        <td>Simple problem</td>
+                        <td>✓ No need for complex models</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4.2 Mathematical Foundation</h2>
+
+            <h3>Linear Regression Equation</h3>
+            <div class="equation">
+                <p>ŷ = β₀ + β₁x₁ + β₂x₂ + β₃x₃ + ε</p>
+                <p style="margin-top: 1rem;">Where:</p>
+                <ul style="text-align: left; margin-left: 2rem;">
+                    <li>ŷ = predicted house price</li>
+                    <li>β₀ = intercept (baseline value)</li>
+                    <li>β₁, β₂, β₃ = coefficients (feature weights)</li>
+                    <li>x₁, x₂, x₃ = input features (sqft, bedrooms, garden)</li>
+                    <li>ε = residual error (prediction - actual)</li>
+                </ul>
+            </div>
+
+            <h3>Our Fitted Model Equation</h3>
+            <div class="card success">
+                <div class="equation">
+                    <p style="font-size: 1.3rem;">
+                        Price = -34,864.15 + 139.16(sqft) + 14,363.47(bedrooms) + 13,629.44(garden)
+                    </p>
+                </div>
+                <p style="margin-top: 1.5rem;">
+                    This is the specific equation learned from our 52 training houses, 
+                    ready to predict prices for new houses.
+                </p>
+            </div>
+
+            <h2>4.3 Model Coefficients Explained</h2>
+
+            <h3>Coefficient Interpretation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Value</th>
+                        <th>Real-World Meaning</th>
+                        <th>Example Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Intercept (β₀)</strong></td>
+                        <td>-$34,864.15</td>
+                        <td>Base price if all features = 0 (theoretical, not practical)</td>
+                        <td>Not directly used; accounts for baseline in equation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sqft (β₁)</strong></td>
+                        <td>$139.16 per sqft</td>
+                        <td>Each additional square foot adds $139.16 to price</td>
+                        <td>2000 sqft house: 2000 × $139.16 = $278,320 contribution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bedrooms (β₂)</strong></td>
+                        <td>$14,363.47 per bedroom</td>
+                        <td>Each additional bedroom adds $14,363.47 to price</td>
+                        <td>4 bedroom house: 4 × $14,363.47 = $57,453.88 contribution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>garden (β₃)</strong></td>
+                        <td>$13,629.44 flat increase</td>
+                        <td>Having a garden adds fixed amount to price</td>
+                        <td>With garden: +$13,629.44 to prediction</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Coefficient Magnitude & Importance</h3>
+            <div class="chart-container">
+                <div class="chart-title">Model Coefficients (Feature Importance)</div>
+                <img src="../assets/images/model_coefficients.png" alt="Feature coefficients bar chart">
+            </div>
+
+            <h4>Interpretation of Coefficients</h4>
+            <div class="card">
+                <p>
+                    <strong>Square Footage has the strongest per-unit effect ($139.16/sqft)</strong><br>
+                    Because: It directly scales with every additional square foot
+                </p>
+            </div>
+
+            <div class="card">
+                <p>
+                    <strong>Bedrooms have large per-room effect ($14,363.47/room)</strong><br>
+                    Because: Each bedroom represents significant additional living space and value
+                </p>
+            </div>
+
+            <div class="card">
+                <p>
+                    <strong>Garden adds fixed value ($13,629.44)</strong><br>
+                    Because: It's a binary feature (present or not), not a continuous scale
+                </p>
+            </div>
+
+            <h2>4.4 Model Training Process</h2>
+
+            <h3>Optimization Objective</h3>
+            <div class="equation">
+                <p>Minimize: J(β) = Σ(yᵢ - ŷᵢ)² / n</p>
+                <p style="margin-top: 1rem;">Where:</p>
+                <ul style="text-align: left; margin-left: 2rem;">
+                    <li>J(β) = cost function (Mean Squared Error)</li>
+                    <li>yᵢ = actual price of house i</li>
+                    <li>ŷᵢ = predicted price of house i</li>
+                    <li>n = number of training samples (52)</li>
+                    <li>Σ = summation over all samples</li>
+                </ul>
+            </div>
+
+            <h3>Model Learning Algorithm</h3>
+            <div class="card">
+                <h4>Ordinary Least Squares (OLS)</h4>
+                <p>
+                    Linear regression uses OLS to find optimal coefficients. This method:
+                </p>
+                <ul class="feature-list">
+                    <li>Minimizes the sum of squared residuals</li>
+                    <li>Has a closed-form solution (no iterative optimization needed)</li>
+                    <li>Directly computes β coefficients from data</li>
+                    <li>Guarantees global optimum (convex optimization)</li>
+                    <li>Fast computation even with large datasets</li>
+                </ul>
+            </div>
+
+            <h3>Training Data Used</h3>
+            <div class="card">
+                <h4>Training Set Characteristics</h4>
+                <ul>
+                    <li><strong>Sample Size:</strong> 52 houses (80% of dataset)</li>
+                    <li><strong>Features:</strong> sqft, bedrooms, garden</li>
+                    <li><strong>Target:</strong> Price (ranging $120k-$420k)</li>
+                    <li><strong>Training Method:</strong> Ordinary Least Squares</li>
+                    <li><strong>Convergence:</strong> Optimal solution found immediately</li>
+                </ul>
+            </div>
+
+            <h2>4.5 Model Assumptions</h2>
+
+            <h3>Linear Regression Assumptions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Assumption</th>
+                        <th>Description</th>
+                        <th>Validated?</th>
+                        <th>Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Linearity</strong></td>
+                        <td>Relationship between features and target is linear</td>
+                        <td>✓ Yes</td>
+                        <td>Scatter plots show clear linear trends, r > 0.97</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Independence</strong></td>
+                        <td>Observations are independent of each other</td>
+                        <td>✓ Likely</td>
+                        <td>Different houses are independent samples</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Homoscedasticity</strong></td>
+                        <td>Errors have constant variance across all feature values</td>
+                        <td>✓ Acceptable</td>
+                        <td>Residual plot shows relatively uniform spread</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Normality</strong></td>
+                        <td>Residual errors follow normal distribution</td>
+                        <td>✓ Yes</td>
+                        <td>Q-Q plot shows residuals approximately normal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No Multicollinearity</strong></td>
+                        <td>Predictors not too highly correlated</td>
+                        <td>⚠ Mild violation</td>
+                        <td>sqft-bedrooms correlation = 0.966 (high but acceptable)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4.6 Feature Scaling & Normalization</h2>
+
+            <h3>Was Feature Scaling Applied?</h3>
+            <div class="card">
+                <h4>✗ No Feature Scaling Applied</h4>
+                <p>
+                    <strong>Why not?</strong>
+                    <ul>
+                        <li>Linear regression is scale-invariant for predictions</li>
+                        <li>Coefficients interpretability improved without scaling</li>
+                        <li>Features already on similar magnitude (thousands to tens of thousands)</li>
+                        <li>Model performance not affected by feature magnitude</li>
+                    </ul>
+                </p>
+                <p>
+                    <strong>If scaling were applied:</strong> Would change coefficient magnitudes but not predictions
+                </p>
+            </div>
+
+            <h2>4.7 Model Complexity & Simplicity</h2>
+
+            <h3>Model Characteristics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Characteristic</th>
+                        <th>Value</th>
+                        <th>Implication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Number of Parameters</td>
+                        <td>4 (β₀, β₁, β₂, β₃)</td>
+                        <td>Very simple - only 4 numbers to store/learn</td>
+                    </tr>
+                    <tr>
+                        <td>Model File Size</td>
+                        <td>~1 KB</td>
+                        <td>Extremely compact - fits on any device</td>
+                    </tr>
+                    <tr>
+                        <td>Prediction Time</td>
+                        <td>Microseconds</td>
+                        <td>Ultra-fast - suitable for real-time applications</td>
+                    </tr>
+                    <tr>
+                        <td>Training Time</td>
+                        <td>< 1ms</td>
+                        <td>Instant - can retrain whenever needed</td>
+                    </tr>
+                    <tr>
+                        <td>Interpretability</td>
+                        <td>100% transparent</td>
+                        <td>Can explain every prediction in simple terms</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>4.8 How the Model Makes Predictions</h2>
+
+            <h3>Step-by-Step Prediction Example</h3>
+            <div class="card">
+                <h4>Scenario: Predicting price for a new house</h4>
+                <p><strong>House specifications:</strong></p>
+                <ul>
+                    <li>Square footage: 2,000 sqft</li>
+                    <li>Bedrooms: 4</li>
+                    <li>Garden: Yes (1)</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Prediction calculation:</strong></p>
+                <div style="background: #f5f5f5; padding: 1.5rem; border-left: 4px solid #3498db; margin: 1rem 0;">
+                    <p>Price = -34,864.15 + 139.16(2000) + 14,363.47(4) + 13,629.44(1)</p>
+                    <p style="margin-top: 0.5rem;">Price = -34,864.15 + 278,320 + 57,453.88 + 13,629.44</p>
+                    <p style="margin-top: 0.5rem;">Price = <strong>$314,539.17</strong></p>
+                </div>
+
+                <p style="margin-top: 1.5rem;"><strong>Interpretation:</strong> The model predicts this house should cost approximately $314,539</p>
+            </div>
+
+            <h3>Confidence in Predictions</h3>
+            <div class="card">
+                <p>
+                    While the model predicts $314,539 as the exact value, in practice predictions have uncertainty:
+                </p>
+                <ul>
+                    <li><strong>Typical error magnitude:</strong> ± $26,109 (RMSE)</li>
+                    <li><strong>Realistic range:</strong> $288,430 - $340,648 (±1 RMSE)</li>
+                    <li><strong>95% confidence range:</strong> Approximately ±2 × RMSE = $262,321 - $366,757</li>
+                </ul>
+                <p>
+                    So while we predict $314,539, the actual price could reasonably be anywhere in the $288k-$341k range.
+                </p>
+            </div>
+
+            <h2>4.9 Mathematical Properties of the Model</h2>
+
+            <h3>Bias-Variance Tradeoff</h3>
+            <div class="card">
+                <h4>Bias</h4>
+                <p>Linear regression has high bias (only assumes linear relationships). Implications:</p>
+                <ul>
+                    <li>Cannot capture non-linear patterns</li>
+                    <li>May underfit if true relationships are complex</li>
+                    <li>In our case: acceptable because relationships ARE linear</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Variance</h4>
+                <p>Linear regression has low variance (simple model prone to overfitting less). Implications:</p>
+                <ul>
+                    <li>Predictions don't change much with training data changes</li>
+                    <li>Generalizes well to new data</li>
+                    <li>Our model: test R² (0.97) ≈ training R² (0.986) - low variance confirmed</li>
+                </ul>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Actual vs Predicted Prices</div>
+                <img src="../assets/images/model_predictions.png" alt="Actual vs predicted scatter plot">
+            </div>
+
+            <h2>4.10 Model Limitations & Failure Cases</h2>
+
+            <h3>When the Model Works Well</h3>
+            <div class="alert alert-success">
+                <ul>
+                    <li>Properties with features within dataset ranges (800-3000 sqft, 2-5 bedrooms)</li>
+                    <li>Standard residential properties with typical layouts</li>
+                    <li>Markets similar to the one in the training data</li>
+                    <li>When garden status is clearly determined</li>
+                </ul>
+            </div>
+
+            <h3>When the Model May Fail</h3>
+            <div class="alert alert-warning">
+                <ul>
+                    <li>Extrapolation beyond dataset ranges (< 800 or > 3000 sqft)</li>
+                    <li>Properties with unusual characteristics not captured by features</li>
+                    <li>During market downturns or bubbles (different market conditions)</li>
+                    <li>Properties with condition issues (model only considers size/bedrooms)</li>
+                    <li>Luxury properties with special features not in training data</li>
+                </ul>
+            </div>
+
+            <h2>4.11 Model Equations & Code</h2>
+
+            <h3>Model in Python</h3>
+            <pre><code>from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Model coefficients
+intercept = -34864.15
+coefficients = [139.16, 14363.47, 13629.44]  # sqft, bedrooms, garden
+
+# Prediction function
+def predict_price(sqft, bedrooms, garden):
+    price = intercept + (coefficients[0] * sqft) + \
+            (coefficients[1] * bedrooms) + (coefficients[2] * garden)
+    return price
+
+# Example usage
+predicted_price = predict_price(sqft=2000, bedrooms=4, garden=1)
+print(f"Predicted Price: ${predicted_price:,.2f}")  # Output: $314,539.17</code></pre>
+            </div>
+
+            <h3>Mathematical Notation</h3>
+            <div class="equation">
+                <p>f(x) = -34864.15 + 139.16·x₁ + 14363.47·x₂ + 13629.44·x₃</p>
+                <p style="margin-top: 1rem;">
+                    where x₁ = sqft, x₂ = bedrooms, x₃ = garden
+                </p>
+            </div>
+
+            <h2>4.12 Comparison with Reality</h2>
+
+            <h3>How Well Does the Model Match Reality?</h3>
+            <div class="card">
+                <h4>R² = 0.97 on test data</h4>
+                <p>
+                    This means the model explains 97% of the variation in actual house prices. 
+                    The remaining 3% is due to:
+                    <ul>
+                        <li>Features not included in model (location, age, condition)</li>
+                        <li>Natural randomness in real estate market</li>
+                        <li>Individual preferences and negotiations</li>
+                        <li>Market timing and demand fluctuations</li>
+                    </ul>
+                </p>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>
+                The linear regression model is elegant in its simplicity: just 4 coefficients to learn, 
+                interpretable impact of each feature, and predictions achievable with basic arithmetic. 
+                Despite its simplicity, it achieves 97% accuracy on test data, demonstrating that for 
+                price prediction with these features, linear relationships are sufficient and optimal.
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Next Steps</h2>
+            <p>
+                Now that you understand how the model works, review the <a href="evaluation.html">Evaluation & Results</a> 
+                section to see detailed performance metrics and error analysis.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>House Price Prediction ML Project</strong></p>
+        <p>Research-level machine learning project with complete documentation</p>
+        <p>&copy; 2024 | Data-Driven Analysis & Machine Learning</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

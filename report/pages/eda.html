@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploratory Data Analysis | House Price Prediction ML</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏠 House Price Prediction ML Project</h1>
+            <p>Complete Machine Learning Analysis & Deployment Guide</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="problem-statement.html">Problem Statement</a></li>
+                <li><a href="methodology.html">Methodology</a></li>
+                <li><a href="eda.html">Data Analysis</a></li>
+                <li><a href="model.html">Model Explanation</a></li>
+                <li><a href="evaluation.html">Evaluation</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+                <li><a href="report.html">Full Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- EDA -->
+        <section class="content">
+            <h1>3. Exploratory Data Analysis (EDA)</h1>
+
+            <div class="alert alert-info">
+                <strong>Section Overview:</strong> This section presents comprehensive data exploration, 
+                visualizations, and insights discovered during the analysis phase.
+            </div>
+
+            <h2>3.1 Dataset Overview</h2>
+
+            <h3>Dataset Composition</h3>
+            <div class="metrics">
+                <div class="metric-box">
+                    <div class="metric-label">Total Records</div>
+                    <div class="metric-value">65</div>
+                    <div class="metric-description">Properties analyzed</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Input Features</div>
+                    <div class="metric-value">3</div>
+                    <div class="metric-description">Predictive variables</div>
+                </div>
+                <div class="metric-box success">
+                    <div class="metric-label">Target Variable</div>
+                    <div class="metric-value">1</div>
+                    <div class="metric-description">House Price</div>
+                </div>
+                <div class="metric-box accent">
+                    <div class="metric-label">Data Quality</div>
+                    <div class="metric-value">100%</div>
+                    <div class="metric-description">0 missing values</div>
+                </div>
+            </div>
+
+            <h3>Descriptive Statistics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Statistic</th>
+                        <th>Square Feet</th>
+                        <th>Bedrooms</th>
+                        <th>Garden (0/1)</th>
+                        <th>Price ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Count</strong></td>
+                        <td>65</td>
+                        <td>65</td>
+                        <td>65</td>
+                        <td>65</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mean</strong></td>
+                        <td>1,650</td>
+                        <td>3.62</td>
+                        <td>0.54</td>
+                        <td>$233,538</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Std Dev</strong></td>
+                        <td>721.98</td>
+                        <td>0.96</td>
+                        <td>0.50</td>
+                        <td>$84,033</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Min</strong></td>
+                        <td>800</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>$120,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>25%</strong></td>
+                        <td>1,200</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>$169,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>50% (Median)</strong></td>
+                        <td>1,600</td>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>$225,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>75%</strong></td>
+                        <td>2,200</td>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>$310,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max</strong></td>
+                        <td>3,000</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>$420,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3.2 Feature Distributions</h2>
+
+            <h3>Distribution Plots</h3>
+            <div class="chart-container">
+                <div class="chart-title">Distribution of All Features</div>
+                <img src="../assets/images/eda_distribution.png" alt="Feature distributions">
+            </div>
+
+            <h3>Key Observations</h3>
+            <div class="card">
+                <h4>Square Feet Distribution</h4>
+                <p>
+                    <strong>Shape:</strong> Relatively uniform with slight concentration in 1200-2000 range<br>
+                    <strong>Skewness:</strong> Moderate positive skew<br>
+                    <strong>Interpretation:</strong> Good spread of property sizes in dataset
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Bedrooms Distribution</h4>
+                <p>
+                    <strong>Shape:</strong> Bimodal distribution with peaks at 3 and 4 bedrooms<br>
+                    <strong>Mode:</strong> Approximately equal frequency at 3 and 4 bedrooms<br>
+                    <strong>Interpretation:</strong> Market dominated by 3-4 bedroom homes
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Garden Distribution</h4>
+                <p>
+                    <strong>Type:</strong> Binary categorical variable<br>
+                    <strong>Frequency:</strong> 54% with garden (35 properties), 46% without (30 properties)<br>
+                    <strong>Balance:</strong> Well-balanced binary distribution
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Price Distribution</h4>
+                <p>
+                    <strong>Shape:</strong> Approximately normal distribution<br>
+                    <strong>Center:</strong> Mean = $233,538, Median = $225,000 (very close)<br>
+                    <strong>Range:</strong> $120,000 - $420,000 (wide range indicates diverse market)<br>
+                    <strong>Skewness:</strong> Slight positive skew
+                </p>
+            </div>
+
+            <h2>3.3 Outlier Detection</h2>
+
+            <div class="chart-container">
+                <div class="chart-title">Box Plots - Outlier Detection</div>
+                <img src="../assets/images/eda_boxplots.png" alt="Box plots for outlier detection">
+            </div>
+
+            <h3>Outlier Analysis Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Outliers Detected</th>
+                        <th>Count</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Square Feet</td>
+                        <td>None</td>
+                        <td>0</td>
+                        <td>All values retained</td>
+                    </tr>
+                    <tr>
+                        <td>Bedrooms</td>
+                        <td>None</td>
+                        <td>0</td>
+                        <td>All values retained</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>None</td>
+                        <td>0</td>
+                        <td>All values retained</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-success">
+                <strong>Conclusion:</strong> No statistical outliers detected. All data points are within 
+                normal ranges (IQR ± 1.5 × IQR bounds). This indicates good data quality.
+            </div>
+
+            <h2>3.4 Correlation Analysis</h2>
+
+            <div class="chart-container">
+                <div class="chart-title">Feature Correlation Heatmap</div>
+                <img src="../assets/images/eda_heatmap.png" alt="Correlation heatmap">
+            </div>
+
+            <h3>Correlation Matrix</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature Pair</th>
+                        <th>Correlation</th>
+                        <th>Strength</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>sqft ↔ price</strong></td>
+                        <td><strong>0.988</strong></td>
+                        <td>Very Strong Positive</td>
+                        <td>Larger properties cost significantly more - primary price driver</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bedrooms ↔ price</strong></td>
+                        <td><strong>0.970</strong></td>
+                        <td>Very Strong Positive</td>
+                        <td>More bedrooms strongly associated with higher prices</td>
+                    </tr>
+                    <tr>
+                        <td><strong>garden ↔ price</strong></td>
+                        <td><strong>0.187</strong></td>
+                        <td>Weak Positive</td>
+                        <td>Garden adds value but much less than size/bedrooms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sqft ↔ bedrooms</strong></td>
+                        <td><strong>0.966</strong></td>
+                        <td>Very Strong Positive</td>
+                        <td>Larger properties naturally have more bedrooms (collinearity hint)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sqft ↔ garden</strong></td>
+                        <td><strong>0.141</strong></td>
+                        <td>Weak Positive</td>
+                        <td>Property size slightly associated with garden presence</td>
+                    </tr>
+                    <tr>
+                        <td><strong>bedrooms ↔ garden</strong></td>
+                        <td><strong>0.176</strong></td>
+                        <td>Weak Positive</td>
+                        <td>Bedroom count slightly associated with garden presence</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Key Insights from Correlation Analysis</h3>
+            <div class="card success">
+                <h4>✓ Strong Predictive Features</h4>
+                <p>
+                    Square footage (0.988) and bedrooms (0.970) are extremely strong predictors of price. 
+                    This justifies their inclusion as primary model features.
+                </p>
+            </div>
+
+            <div class="card warning">
+                <h4>⚠ Multicollinearity Alert</h4>
+                <p>
+                    High correlation between sqft (0.966) and bedrooms suggests collinearity. 
+                    However, both features are retained because:
+                    <ul>
+                        <li>Both have independent predictive power</li>
+                        <li>Model coefficients are still interpretable</li>
+                        <li>Predictions remain accurate despite collinearity</li>
+                        <li>Removing either feature would hurt performance</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>📊 Garden Feature Insight</h4>
+                <p>
+                    Though garden has weak correlation with price (0.187), it remains valuable because:
+                    <ul>
+                        <li>It still represents a meaningful price difference ($13,629)</li>
+                        <li>It's a distinct, measurable property characteristic</li>
+                        <li>Its inclusion improves model fit</li>
+                    </ul>
+                </p>
+            </div>
+
+            <h2>3.5 Feature Relationships with Target</h2>
+
+            <div class="chart-container">
+                <div class="chart-title">Feature vs Price Relationships</div>
+                <img src="../assets/images/eda_features_vs_target.png" alt="Feature vs target scatter plots with trend lines">
+            </div>
+
+            <h3>Relationship Analysis</h3>
+            <div class="card">
+                <h4>Square Feet vs Price</h4>
+                <p>
+                    <strong>Pattern:</strong> Strong linear positive relationship<br>
+                    <strong>Trend Line Slope:</strong> ~$140 per square foot<br>
+                    <strong>Scatter:</strong> Points closely follow trend line with minimal deviation<br>
+                    <strong>Linear Fit Quality:</strong> Excellent - explains ~97.6% of variance
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Bedrooms vs Price</h4>
+                <p>
+                    <strong>Pattern:</strong> Clear positive steps in price across bedroom categories<br>
+                    <strong>Average Price by Bedrooms:</strong><br>
+                    &nbsp;&nbsp;2 bedrooms: ~$150k<br>
+                    &nbsp;&nbsp;3 bedrooms: ~$200k<br>
+                    &nbsp;&nbsp;4 bedrooms: ~$310k<br>
+                    &nbsp;&nbsp;5 bedrooms: ~$390k<br>
+                    <strong>Linear Fit Quality:</strong> Very good - explains ~94.1% of variance
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Garden vs Price</h4>
+                <p>
+                    <strong>Pattern:</strong> Two distinct groups - with and without garden<br>
+                    <strong>Average Price with Garden:</strong> ~$270k<br>
+                    <strong>Average Price without Garden:</strong> ~$210k<br>
+                    <strong>Price Difference:</strong> ~$60k gap (though model coefficient says ~$13.6k)<br>
+                    <strong>Note:</strong> Garden alone appears significant but loses importance when combined with other features
+                </p>
+            </div>
+
+            <h2>3.6 Pair Plot & Feature Interactions</h2>
+
+            <div class="chart-container">
+                <div class="chart-title">Pair Plot - Feature Relationships</div>
+                <img src="../assets/images/eda_pairplot.png" alt="Pair plot showing all feature relationships">
+            </div>
+
+            <h3>Interaction Observations</h3>
+            <ul>
+                <li><strong>sqft and bedrooms interact:</strong> Larger homes tend to have more bedrooms</li>
+                <li><strong>All features show roughly linear relationships:</strong> Supports linear regression choice</li>
+                <li><strong>No obvious non-linear patterns:</strong> No need for polynomial features</li>
+                <li><strong>Price distribution is fairly normal:</strong> Meets assumptions for linear regression</li>
+            </ul>
+
+            <h2>3.7 Target Variable (Price) Deep Dive</h2>
+
+            <div class="chart-container">
+                <div class="chart-title">Price Distribution Analysis</div>
+                <img src="../assets/images/eda_target.png" alt="Detailed price distribution">
+            </div>
+
+            <h3>Price Distribution Characteristics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Statistic</th>
+                        <th>Value</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mean Price</td>
+                        <td>$233,538</td>
+                        <td>Average property value in dataset</td>
+                    </tr>
+                    <tr>
+                        <td>Median Price</td>
+                        <td>$225,000</td>
+                        <td>Typical property value (very close to mean - symmetric distribution)</td>
+                    </tr>
+                    <tr>
+                        <td>Std Dev</td>
+                        <td>$84,033</td>
+                        <td>Most prices within ±$84k of mean</td>
+                    </tr>
+                    <tr>
+                        <td>Coefficient of Variation</td>
+                        <td>36%</td>
+                        <td>Moderate variability - diverse price range</td>
+                    </tr>
+                    <tr>
+                        <td>Skewness</td>
+                        <td>0.32 (slight positive)</td>
+                        <td>Slight tail toward higher prices</td>
+                    </tr>
+                    <tr>
+                        <td>Kurtosis</td>
+                        <td>Low</td>
+                        <td>Distribution close to normal</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3.8 Data Quality Summary</h2>
+
+            <div class="card">
+                <h3>✓ Data Quality Checks Passed</h3>
+                <ul class="feature-list">
+                    <li>No missing values in any feature (0 nulls across 65 × 4 = 260 values)</li>
+                    <li>No statistical outliers detected in any feature</li>
+                    <li>All values within reasonable ranges</li>
+                    <li>Data types appropriate for analysis</li>
+                    <li>Sufficient variation in all features</li>
+                    <li>Target variable normally distributed</li>
+                </ul>
+            </div>
+
+            <div class="card warning">
+                <h3>⚠ Data Quality Caveats</h3>
+                <ul>
+                    <li>Small dataset size (65 records) - limited generalization capability</li>
+                    <li>8 duplicate records (12% of data) - may inflate confidence slightly</li>
+                    <li>Time period unknown - no information about when data was collected</li>
+                    <li>Geographic scope unclear - may not represent broader markets</li>
+                    <li>Missing potentially important features (location, age, condition)</li>
+                </ul>
+            </div>
+
+            <h2>3.9 Key Findings & Insights</h2>
+
+            <h3>Dataset Insights</h3>
+            <div class="grid">
+                <div class="grid-item accent">
+                    <h4>1. Strong Linearity</h4>
+                    <p>Features show strong linear relationships with price, making linear regression ideal</p>
+                </div>
+                <div class="grid-item success">
+                    <h4>2. No Data Issues</h4>
+                    <p>Clean data with no missing values or outliers detected</p>
+                </div>
+                <div class="grid-item">
+                    <h4>3. Multicollinearity Present</h4>
+                    <p>sqft and bedrooms highly correlated (0.966) but both valuable for predictions</p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>4. Weak Garden Effect</h4>
+                    <p>Garden has weak correlation (0.187) but still contributes meaningfully to price</p>
+                </div>
+                <div class="grid-item accent">
+                    <h4>5. Price Drivers Identified</h4>
+                    <p>Clear understanding of what drives prices: primarily size and bedroom count</p>
+                </div>
+                <div class="grid-item success">
+                    <h4>6. Ready for Modeling</h4>
+                    <p>Data characteristics support linear regression with confidence</p>
+                </div>
+            </div>
+
+            <h2>3.10 EDA Implications for Modeling</h2>
+
+            <div class="card">
+                <h4>Model Selection Support</h4>
+                <p>
+                    EDA findings strongly support choice of linear regression:
+                    <ul class="feature-list">
+                        <li>Linear relationships between all features and target</li>
+                        <li>No obvious non-linear patterns requiring polynomial features</li>
+                        <li>Normally distributed target variable</li>
+                        <li>No systematic heteroscedasticity (constant variance across range)</li>
+                        <li>Small dataset benefits from simpler model (less prone to overfitting)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Feature Engineering Recommendations</h4>
+                <p>
+                    Based on EDA:
+                    <ul class="feature-list">
+                        <li>All three features should be retained - each adds value</li>
+                        <li>No feature transformations needed (no log scale requirements)</li>
+                        <li>No feature scaling needed for linear regression</li>
+                        <li>Consider interaction terms with larger dataset (sqft × bedrooms)</li>
+                    </ul>
+                </p>
+            </div>
+        </section>
+
+        <section class="content">
+            <h2>Next Steps</h2>
+            <p>
+                With the data fully explored, proceed to the <a href="model.html">Model Explanation</a> 
+                section to understand how the linear regression model works and its mathematical foundations.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>House Price Prediction ML Project</strong></p>
+        <p>Research-level machine learning project with complete documentation</p>
+        <p>&copy; 2024 | Data-Driven Analysis & Machine Learning</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

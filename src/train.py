@@ -26,7 +26,7 @@ def clean_data(df):
 
 
 def select_features(df):
-    # 🔴 IMPORTANT: Explicitly define feature columns
+    # IMPORTANT: Explicitly define feature columns
     feature_columns = ['sqft', 'bedrooms', 'garden']   # change if needed
     target_column = 'price'
 

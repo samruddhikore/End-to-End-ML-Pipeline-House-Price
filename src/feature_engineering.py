@@ -1,6 +1,9 @@
-# Feature engineering module
-# Functions for creating and engineering features
+# src/feature_engineering.py
 
-def create_features(df):
-    """Create and engineer features for the model."""
-    pass
+def select_features(df):
+    # Example: Assume last column is target
+    X = df.iloc[:, :-1]
+    y = df.iloc[:, -1]
+
+    print("Feature selection completed!")
+    return X, y

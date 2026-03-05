@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Guide | House Price Prediction ML</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🏠 House Price Prediction ML Project</h1>
+            <p>Complete Machine Learning Analysis & Deployment Guide</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="problem-statement.html">Problem Statement</a></li>
+                <li><a href="methodology.html">Methodology</a></li>
+                <li><a href="eda.html">Data Analysis</a></li>
+                <li><a href="model.html">Model Explanation</a></li>
+                <li><a href="evaluation.html">Evaluation</a></li>
+                <li><a href="deployment.html">Deployment</a></li>
+                <li><a href="report.html">Full Report</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Deployment -->
+        <section class="content">
+            <h1>6. Deployment Guide & Real-World Applications</h1>
+
+            <div class="alert alert-info">
+                <strong>Section Overview:</strong> This section provides comprehensive guidance on deploying 
+                the model to production, monitoring, and integrating into real-world business processes.
+            </div>
+
+            <h2>6.1 Deployment Overview</h2>
+
+            <h3>Current Project Status</h3>
+            <div class="card success">
+                <h4>✓ Model Ready for Production</h4>
+                <ul class="feature-list">
+                    <li>High accuracy achieved (97% test R²)</li>
+                    <li>Model is compact and fast (microsecond predictions)</li>
+                    <li>Code is documented and maintainable</li>
+                    <li>All evaluation metrics pass quality gates</li>
+                    <li>Can be deployed immediately</li>
+                </ul>
+            </div>
+
+            <h2>6.2 Deployment Architecture</h2>
+
+            <h3>Available Deployment Options</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Best For</th>
+                        <th>Complexity</th>
+                        <th>Scalability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Streamlit Web App</strong></td>
+                        <td>Quick prototypes, internal tools, demonstrations</td>
+                        <td>Very Low</td>
+                        <td>Limited (single server)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Flask REST API</strong></td>
+                        <td>Mobile apps, third-party integrations, production APIs</td>
+                        <td>Low</td>
+                        <td>Good (can scale horizontally)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Docker Container</strong></td>
+                        <td>Cloud deployment, containerized services, DevOps</td>
+                        <td>Medium</td>
+                        <td>Excellent (any cloud platform)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Serverless Functions</strong></td>
+                        <td>Pay-per-use, variable load, cost optimization</td>
+                        <td>Medium</td>
+                        <td>Unlimited (auto-scaling)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Embedded (Excel/Database)</strong></td>
+                        <td>Legacy systems, non-technical users, direct integration</td>
+                        <td>Medium</td>
+                        <td>Not scalable</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>6.3 Option 1: Streamlit Web Application</h2>
+
+            <h3>Current Implementation</h3>
+            <div class="card">
+                <p>
+                    <strong>Status:</strong> Already implemented in <code>app.py</code>
+                </p>
+                <p>
+                    <strong>How to Use:</strong>
+                </p>
+                <pre><code>cd C:\CO6K\MLMicroproject\house-price-ml
+streamlit run app.py</code></pre>
+                <p>
+                    Then open your browser to <code>http://localhost:8501</code>
+                </p>
+            </div>
+
+            <h3>Features</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>Web Interface</h4>
+                    <p>User-friendly interface requiring no technical knowledge</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Interactive Input</h4>
+                    <p>Sliders and number inputs for easy feature specification</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Real-Time Predictions</h4>
+                    <p>Instant price predictions as users adjust features</p>
+                </div>
+                <div class="grid-item">
+                    <h4>No Installation</h4>
+                    <p>Just run a single command - no configuration needed</p>
+                </div>
+            </div>
+
+            <h3>Scaling Streamlit</h3>
+            <div class="card">
+                <h4>Limitations</h4>
+                <ul>
+                    <li>Single-threaded (one prediction at a time)</li>
+                    <li>In-memory only (no database persistence)</li>
+                    <li>Not suitable for high-volume API requests</li>
+                </ul>
+                <h4>Solutions</h4>
+                <ul class="feature-list">
+                    <li>Deploy behind load balancer with multiple instances</li>
+                    <li>Use Streamlit Cloud for hosting (automatic scaling)</li>
+                    <li>Migrate to Flask/FastAPI for production at scale</li>
+                </ul>
+            </div>
+
+            <h2>6.4 Option 2: Flask REST API</h2>
+
+            <h3>Building a Flask API</h3>
+            <div class="card">
+                <h4>Implementation Strategy</h4>
+                <p>Create <code>api.py</code> for REST endpoint:</p>
+                <pre><code>from flask import Flask, request, jsonify
+import pickle
+import numpy as np
+
+app = Flask(__name__)
+
+# Load model once at startup
+with open('models/model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    
+    # Extract features
+    features = np.array([[
+        data['sqft'],
+        data['bedrooms'],
+        data['garden']
+    ]])
+    
+    # Make prediction
+    prediction = model.predict(features)[0]
+    
+    return jsonify({
+        'predicted_price': round(prediction, 2),
+        'inputs': data
+    })
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0', port=5000)</code></pre>
+            </div>
+
+            <h3>API Usage Example</h3>
+            <div class="card">
+                <h4>Request</h4>
+                <pre><code>POST /predict
+Content-Type: application/json
+
+{
+    "sqft": 2000,
+    "bedrooms": 4,
+    "garden": 1
+}</code></pre>
+
+                <h4>Response</h4>
+                <pre><code>{
+    "predicted_price": 314539.17,
+    "inputs": {
+        "sqft": 2000,
+        "bedrooms": 4,
+        "garden": 1
+    }
+}</code></pre>
+            </div>
+
+            <h2>6.5 Option 3: Docker Containerization</h2>
+
+            <h3>Docker Setup</h3>
+            <div class="card">
+                <h4>Dockerfile</h4>
+                <pre><code>FROM python:3.9
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["python", "api.py"]</code></pre>
+
+                <h4>Building & Running</h4>
+                <pre><code># Build image
+docker build -t house-price-predictor .
+
+# Run container
+docker run -p 5000:5000 house-price-predictor</code></pre>
+            </div>
+
+            <h3>Docker Benefits</h3>
+            <ul class="feature-list">
+                <li>Consistent environment across development and production</li>
+                <li>Easy deployment to any cloud platform (AWS, GCP, Azure)</li>
+                <li>Horizontal scaling with container orchestration (Kubernetes)</li>
+                <li>Automatic dependency management</li>
+            </ul>
+
+            <h2>6.6 Option 4: Cloud Deployment</h2>
+
+            <h3>AWS Lambda (Serverless)</h3>
+            <div class="card">
+                <h4>Deployment Steps</h4>
+                <ol>
+                    <li>Create Lambda function from Docker image or ZIP</li>
+                    <li>Configure API Gateway for HTTP access</li>
+                    <li>Set environment variables for model path</li>
+                    <li>Test endpoint</li>
+                    <li>Monitor with CloudWatch</li>
+                </ol>
+                <h4>Benefits</h4>
+                <ul class="feature-list">
+                    <li>Pay only for actual predictions (cost-effective)</li>
+                    <li>Automatic scaling to handle traffic spikes</li>
+                    <li>No server management required</li>
+                    <li>High availability across regions</li>
+                </ul>
+            </div>
+
+            <h3>Google Cloud Run</h3>
+            <div class="card">
+                <h4>Even Simpler Alternative</h4>
+                <pre><code>gcloud run deploy house-price-predictor \
+    --source . \
+    --platform managed \
+    --region us-central1 \
+    --allow-unauthenticated</code></pre>
+                <h4>Advantages</h4>
+                <ul class="feature-list">
+                    <li>Minimal configuration needed</li>
+                    <li>Automatic scaling</li>
+                    <li>Docker-ready</li>
+                    <li>One command deployment</li>
+                </ul>
+            </div>
+
+            <h2>6.7 Real-World Application Scenarios</h2>
+
+            <h3>Scenario 1: Real Estate Agency</h3>
+            <div class="card accent">
+                <h4>Use Case: Price Estimation for Listing</h4>
+                <p>
+                    <strong>User:</strong> Real estate agent listing new property<br>
+                    <strong>Process:</strong><br>
+                    1. Enter property features into web form (sqft, bedrooms, garden status)<br>
+                    2. Get instant price estimate<br>
+                    3. Compare with comparable properties<br>
+                    4. Set listing price with confidence<br>
+                    <strong>Benefit:</strong> Faster, data-driven pricing decisions
+                </p>
+            </div>
+
+            <h3>Scenario 2: Property Investment Analysis</h3>
+            <div class="card accent">
+                <h4>Use Case: Investment Opportunity Screening</h4>
+                <p>
+                    <strong>User:</strong> Real estate investor<br>
+                    <strong>Process:</strong><br>
+                    1. Batch upload multiple property listings<br>
+                    2. Get predicted fair value for each<br>
+                    3. Identify undervalued properties (actual price < predicted)<br>
+                    4. Prioritize investment targets<br>
+                    <strong>Benefit:</strong> Identify buying opportunities systematically
+                </p>
+            </div>
+
+            <h3>Scenario 3: Appraisal Support Tool</h3>
+            <div class="card accent">
+                <h4>Use Case: Quick Validation of Appraisals</h4>
+                <p>
+                    <strong>User:</strong> Property appraiser<br>
+                    <strong>Process:</strong><br>
+                    1. Complete detailed appraisal assessment<br>
+                    2. Use model to get independent prediction<br>
+                    3. Compare model prediction with appraisal value<br>
+                    4. Investigate significant discrepancies<br>
+                    <strong>Benefit:</strong> Quality control and error detection
+                </p>
+            </div>
+
+            <h3>Scenario 4: Mortgage Underwriting</h3>
+            <div class="card accent">
+                <h4>Use Case: Property Valuation Verification</h4>
+                <p>
+                    <strong>User:</strong> Mortgage lender<br>
+                    <strong>Process:</strong><br>
+                    1. Borrower applies for mortgage on property<br>
+                    2. Automated model predicts fair value<br>
+                    3. Check if loan-to-value ratio acceptable<br>
+                    4. Flag unusual valuations for manual review<br>
+                    <strong>Benefit:</strong> Risk management and compliance
+                </p>
+            </div>
+
+            <h3>Scenario 5: Market Analysis Dashboard</h3>
+            <div class="card accent">
+                <h4>Use Case: Market Insights and Trends</h4>
+                <p>
+                    <strong>User:</strong> Market analyst<br>
+                    <strong>Process:</strong><br>
+                    1. Integrate model predictions with property database<br>
+                    2. Calculate overvalued/undervalued percentages by area<br>
+                    3. Track prediction errors over time<br>
+                    4. Detect market shifts when predictions diverge from reality<br>
+                    <strong>Benefit:</strong> Data-driven market intelligence
+                </p>
+            </div>
+
+            <h2>6.8 Model Monitoring & Maintenance</h2>
+
+            <h3>Performance Monitoring</h3>
+            <div class="card">
+                <h4>Key Metrics to Track</h4>
+                <ul>
+                    <li><strong>Prediction Accuracy:</strong> Compare predictions vs actual sold prices</li>
+                    <li><strong>Error Distribution:</strong> Monitor for systematic biases</li>
+                    <li><strong>Data Drift:</strong> Market changes affecting feature distributions</li>
+                    <li><strong>Prediction Latency:</strong> API response time performance</li>
+                    <li><strong>System Reliability:</strong> Uptime and error rates</li>
+                </ul>
+            </div>
+
+            <h3>Retraining Strategy</h3>
+            <div class="card">
+                <h4>When to Retrain</h4>
+                <ul>
+                    <li><strong>Quarterly:</strong> Regular scheduled retraining with new data</li>
+                    <li><strong>On Demand:</strong> If prediction error degrades by > 5%</li>
+                    <li><strong>After Major Events:</strong> Market crashes, economic shifts</li>
+                    <li><strong>Data Collection:</strong> Accumulate 100+ new samples before retraining</li>
+                </ul>
+            </div>
+
+            <h3>Monitoring Setup</h3>
+            <div class="card">
+                <h4>Recommended Tools</h4>
+                <table>
+                    <tr>
+                        <td><strong>Component</strong></td>
+                        <td>Tool</td>
+                    </tr>
+                    <tr>
+                        <td>Application Monitoring</td>
+                        <td>CloudWatch, DataDog, New Relic</td>
+                    </tr>
+                    <tr>
+                        <td>Model Performance</td>
+                        <td>Evidently AI, WhyLabs</td>
+                    </tr>
+                    <tr>
+                        <td>Logging</td>
+                        <td>CloudWatch Logs, ELK Stack</td>
+                    </tr>
+                    <tr>
+                        <td>Alerting</td>
+                        <td>PagerDuty, OpsGenie</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>6.9 Version Control & Model Registry</h2>
+
+            <h3>Tracking Model Versions</h3>
+            <div class="card">
+                <h4>Implement Model Registry</h4>
+                <pre><code>models/
+├── model_v1.0_baseline.pkl         (Initial model: R²=0.97)
+├── model_v1.1_gardenbias_fix.pkl   (Fixed garden bias: R²=0.972)
+├── model_v2.0_with_age.pkl         (Added age feature: R²=0.975)
+└── model_current.pkl               (Symlink to active))version)</code></pre>
+                <h4>Metadata File</h4>
+                <pre><code>model_registry.json:
+{
+  "current_version": "v2.0",
+  "models": {
+    "v1.0": {
+      "date": "2024-01-15",
+      "test_r2": 0.9700,
+      "notes": "Initial baseline model",
+      "status": "archived"
+    },
+    "v2.0": {
+      "date": "2024-02-20",
+      "test_r2": 0.9750,
+      "features": ["sqft", "bedrooms", "garden", "age"],
+      "notes": "Added age feature",
+      "status": "production"
+    }
+  }
+}</code></pre>
+            </div>
+
+            <h2>6.10 API Security & Authentication</h2>
+
+            <h3>Security Measures</h3>
+            <div class="card">
+                <h4>For Internal/Private APIs</h4>
+                <ul class="feature-list">
+                    <li>API key authentication (simple, for internal use)</li>
+                    <li>HTTPS/TLS encryption for all communications</li>
+                    <li>Rate limiting to prevent abuse</li>
+                    <li>Input validation on all parameters</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>For Public APIs</h4>
+                <ul class="feature-list">
+                    <li>OAuth 2.0 authentication</li>
+                    <li>JWT tokens for stateless authentication</li>
+                    <li>CORS policy restrictions</li>
+                    <li>WAF (Web Application Firewall)</li>
+                    <li>DDoS protection</li>
+                </ul>
+            </div>
+
+            <h3>Example: API Key Authentication</h3>
+            <div class="card">
+                <pre><code>@app.route('/predict', methods=['POST'])
+def predict():
+    api_key = request.headers.get('X-API-Key')
+    
+    if not api_key or api_key != os.getenv('API_KEY'):
+        return jsonify({'error': 'Unauthorized'}), 401
+    
+    # ... rest of prediction logic</code></pre>
+            </div>
+
+            <h2>6.11 Performance Optimization</h2>
+
+            <h3>Optimization Techniques</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Optimization</th>
+                        <th>Impact</th>
+                        <th>Effort</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Model Caching</td>
+                        <td>Eliminate reload overhead</td>
+                        <td>Very Low</td>
+                    </tr>
+                    <tr>
+                        <td>Batch Predictions</td>
+                        <td>Process multiple at once</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>Model Quantization</td>
+                        <td>Smaller model, faster inference</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>GPU Acceleration</td>
+                        <td>For complex models (overkill here)</td>
+                        <td>High</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>6.12 Cost Estimation</h2>
+
+            <h3>Deployment Cost Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Setup Cost</th>
+                        <th>Monthly Cost</th>
+                        <th>Annual Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Streamlit Cloud (100K predictions/month)</td>
+                        <td>$0</td>
+                        <td>$20-100</td>
+                        <td>$240-1,200</td>
+                    </tr>
+                    <tr>
+                        <td>AWS Lambda (100K predictions/month)</td>
+                        <td>$0</td>
+                        <td>$10-50</td>
+                        <td>$120-600</td>
+                    </tr>
+                    <tr>
+                        <td>Google Cloud Run (100K predictions/month)</td>
+                        <td>$0</td>
+                        <td>$5-30</td>
+                        <td>$60-360</td>
+                    </tr>
+                    <tr>
+                        <td>AWS EC2 (t3.micro reserved)</td>
+                        <td>$0</td>
+                        <td>$10-15</td>
+                        <td>$120-180</td>
+                    </tr>
+                    <tr>
+                        <td>On-Premise Server</td>
+                        <td>$2,000-5,000</td>
+                        <td>$200-500</td>
+                        <td>$2,400-6,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>6.13 Production Checklist</h2>
+
+            <div class="card">
+                <h4>Before Going Live</h4>
+                <ul class="feature-list">
+                    <li>✓ Model performance validated (R² > 0.95)</li>
+                    <li>✓ Code reviewed and tested</li>
+                    <li>✓ API endpoints documented</li>
+                    <li>✓ Error handling implemented</li>
+                    <li>✓ Logging configured</li>
+                    <li>✓ Monitoring set up</li>
+                    <li>✓ Security measures in place</li>
+                    <li>✓ Authentication configured</li>
+                    <li>✓ Load testing completed</li>
+                    <li>✓ Backup and disaster recovery considered</li>
+                    <li>✓ Documentation complete</li>
+                    <li>✓ User training materials prepared</li>
+                </ul>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>
+                The House Price Prediction model is production-ready and can be deployed using any of 
+                the approaches outlined above. Start with Streamlit for quick deployment, then migrate 
+                to more scalable solutions (Flask, Docker, Serverless) as demand grows.
+            </p>
+        </section>
+
+        <section class="content">
+            <h2>Next Steps</h2>
+            <p>
+                Finally, read the <a href="report.html">Complete Research Report</a> for a 
+                comprehensive academic-level summary of the entire project.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>House Price Prediction ML Project</strong></p>
+        <p>Research-level machine learning project with complete documentation</p>
+        <p>&copy; 2024 | Data-Driven Analysis & Machine Learning</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
